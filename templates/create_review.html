@@ -8,9 +8,25 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 </head>
 <body>
-    <div>Hello Will</div>
-    <a href="{{ url_for('create_review') }}">Create Review</a>
-    <a href="{{ url_for('reviews') }}">All Reviews</a>
+
+    <form method="POST" action="{{url_for('create_review')}}">
+        <label>Review Title:</label>
+        <input name="review_title">
+        <label>Piece:</label>
+        <input name="piece_title">
+        <label>Medium:</label>
+        <input name="medium">
+        <label>Artist:</label>
+        <input name="artist">
+        
+        <label>Review Text:</label>
+        <textarea name="text"></textarea>
+      
+        <label>Rating:</label>
+        <input type="number" name="rating">
+      
+        <button>Submit</button>
+      </form>
 
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
