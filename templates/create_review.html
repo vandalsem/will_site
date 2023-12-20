@@ -8,28 +8,98 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 </head>
 <body>
-
-    <form method="POST" action="{{url_for('create_review')}}">
-        <label>Review Title:</label>
-        <input name="review_title">
-        <label>Piece:</label>
-        <input name="piece_title">
-        <label>Medium:</label>
-        <input name="medium">
-        <label>Artist:</label>
-        <input name="artist">
+    <form method="POST" action="{{ url_for('create_review') }}">
+        {{ form.csrf_token() }}
         
-        <label>Review Text:</label>
-        <textarea name="text"></textarea>
-      
-        <label>Rating:</label>
-        <input type="number" name="rating">
-      
-        <button>Submit</button>
-      </form>
+        <div>
+            {{ form.medium.label }}
+            {{ form.medium(class="form-control") }}
+            {% if form.medium.errors %}
+                <ul class="errors">
+                    {% for error in form.medium.errors %}
+                        <li>{{ error }}</li>
+                        console.log('medium error');
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
 
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+        <div>
+            {{ form.review_title.label }}
+            {{ form.review_title(class="form-control") }}
+            {% if form.review_title.errors %}
+                <ul class="errors">
+                    {% for error in form.review_title.errors %}
+                        <li>{{ error }}</li>
+                        console.log('review title error');
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.piece_title.label }}
+            {{ form.piece_title(class="form-control") }}
+            {% if form.piece_title.errors %}
+                <ul class="errors">
+                    {% for error in form.piece_title.errors %}
+                        <li>{{ error }}</li>
+                        console.log('piece title error');
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.artist.label }}
+            {{ form.artist(class="form-control") }}
+            {% if form.artist.errors %}
+                <ul class="errors">
+                    {% for error in form.artist.errors %}
+                        <li>{{ error }}</li>
+                        console.log('artist error');
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.description.label }}
+            {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <ul class="errors">
+                    {% for error in form.description.errors %}
+                        <li>{{ error }}</li>
+                        console.log('description error');
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.rating.label }}
+            {{ form.rating(class="form-control") }}
+            {% if form.rating.errors %}
+                <ul class="errors">
+                    {% for error in form.rating.errors %}
+                        <li>{{ error }}</li>
+                        console.log('rating error');
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+
+    <br>
+    <a href="{{ url_for('reviews') }}">All Reviews</a>
+    <br>
+    <a href="{{ url_for('index') }}">Home</a>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
 </body>
 </html>
