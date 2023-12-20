@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Reviews</title>
+    <title>Review View</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='slate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 </head>
 <body>
-    <h1>Reviews</h1>
   
-    {% for review in reviews %}
-        <h4><a href="{{ url_for('review_details', review_id=review.id) }}">{{ review.review_title }}</a></h4>
-        <p>{{review.description}}</p>
-    {% endfor %}
+    <h2>{{ review.review_title }}</h2>
+    <p>Medium: {{ review.medium }}</p>
+    <p>Artist: {{ review.artist }}</p>
+    <p>Description: {{ review.description }}</p>
+    <p>Rating: {{ review.rating }}</p>
+    
+    <p><a href="{{ url_for('reviews') }}">Back to Reviews</a></p>
     <br>
     <a href="{{ url_for('create_review') }}">Create Review</a>
     <br>

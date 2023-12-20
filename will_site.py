@@ -49,31 +49,32 @@ def reviews():
 def create_review():
 
     form = ReviewForm()
-    print(request.method)
-    if request.method=='POST':
-        print('yeah')
-        if form.validate_on_submit():
-            print('validated')
-            review = Reviews(
-                medium = form.medium.data,
-                review_title = form.review_title.data,
-                piece_title = form.piece_title.data,
-                artist = form.artist.data,
-                description = form.description.data,
-                rating = form.rating.data
-            )
-            review.save()
-            print('here')
-            return redirect(url_for('submit_review'))
-        else:
-            print('not validated')
+    
+    if request.method=='POST' and form.validate_on_submit():
+
+        review = Reviews(
+            medium = form.medium.data,
+            review_title = form.review_title.data,
+            piece_title = form.piece_title.data,
+            artist = form.artist.data,
+            description = form.description.data,
+            rating = form.rating.data
+        )
+
+        review.save()
+        print(review.id)
+        return redirect(url_for('submit_review'))
+    
     return render_template('create_review.html', form=form)
 
 @app.route('/submit_review',methods=['GET','POST'])
 def submit_review():
-    print('rendered')
-    form = ReviewForm()
-    return render_template('submit_review.html',form=form)
+    return render_template('submit_review.html')
+
+@app.route('/review/<review_id>')
+def review_details(review_id):
+    review = Reviews.objects.get(id=review_id)
+    return render_template('review_details.html', review=review)
 
 if __name__ == '__main__':
     app.run(debug=True)
