@@ -82,8 +82,9 @@ def edit_review(review_id):
     form = ReviewForm(request.form, obj=review)
 
     if request.method == 'POST':
-        if 'cancel' in request.form:
-            return redirect(url_for('reviews'))
+        if 'Cancel' in request.form:
+            print('hererer')
+            return redirect(url_for('review_details'), review_id=review_id)
         if form.validate_on_submit():
             form.populate_obj(review)
             review.save()

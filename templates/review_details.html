@@ -4,10 +4,28 @@
     <title>Review View</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.delete-button').click(function() {
+                var reviewId = $(this).data('review-id');
+                
+                $('#confirmDelete').data('review-id', reviewId);
+                $('#deleteConfirmationModal').modal('show');
+            });
+            
+            $('#confirmDelete').click(function() {
+                // Get the review ID from the modal
+                var reviewId = $(this).data('review-id');
+                
+                // Redirect to the delete route with the review ID
+                window.location.href = '/delete_review/' + reviewId;
+            });
+        });
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='slate.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
     <style>
         body{
             margin: 0 auto;
@@ -51,29 +69,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $('.delete-button').click(function() {
-                // Get the review ID from the data attribute
-                var reviewId = $(this).data('review-id');
-                
-                // Set the review ID in the modal
-                $('#confirmDelete').data('review-id', reviewId);
-                
-                // Show the confirmation modal
-                $('#deleteConfirmationModal').modal('show');
-            });
-            
-            $('#confirmDelete').click(function() {
-                // Get the review ID from the modal
-                var reviewId = $(this).data('review-id');
-                
-                // Redirect to the delete route with the review ID
-                window.location.href = '/delete_review/' + reviewId;
-            });
-        });
-    </script>
 
 
 </body>
